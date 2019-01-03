@@ -13,7 +13,7 @@ class CreatProjeto extends Migration
      */
     public function up()
     {
-        Schema::create('projeto', function (Blueprint $table) {
+        Schema::create('projetos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('autor');

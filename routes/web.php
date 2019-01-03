@@ -15,15 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*
- * Rotas Projetos
- * */
 Route::get('projetos', 'ProjetoController@index');
-Route::get('projetos/novo', 'ProjetoController@novo');
-Route::post('projetos/salvar', 'ProjetoController@salvar');
+Route::get('users', 'UserController@index');
 
-/*
- * Rotas de autenticação de Usuarios
- * */
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middeware' => 'web'], function (){
+
+    Auth::routes();
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('projetos/novo', 'ProjetoController@novo');
+    Route::post('projetos/salvar', 'ProjetoController@salvar');
+
+});
+
+

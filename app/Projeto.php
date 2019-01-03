@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Projeto extends Model
 {
     protected $fillable = [
-        'nome',
+        'name',
         'autor',
+        'userId',
         'descricao',
         'arquivo'
     ];

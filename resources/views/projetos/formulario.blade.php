@@ -11,10 +11,15 @@
                     </div>
 
                     <div class="panel-body">
+
+                        @if(Session::has('messagem_sucesso'))
+                            <div class="alert alert-success">{{Session::get('messagem_sucesso')}}</div>
+                        @endif
+
                         {!!Form::open(['url'=>'projetos/salvar'])!!}
 
-                        {!! Form::label ('nome','Nome do Projeto')!!}
-                        {!! Form::input('text', 'nome', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'Nome do Projeto'])!!}
+                        {!! Form::label ('name','Nome do Projeto')!!}
+                        {!! Form::input('text', 'name', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'Nome do Projeto'])!!}
 
                         {!! Form::label ('autor','Autor')!!}
                         {!! Form::input('text', 'autor', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'Autor'])!!}
@@ -24,6 +29,9 @@
 
                         {!! Form::label ('arquivo','Arquivo')!!}
                         {!! Form::input('text', 'arquivo', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'Arquivo'])!!}
+
+                        {!! Form::label ('userId','userId')!!}
+                        {!! Form::input('number', 'userId', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'userId'])!!}
 
                         {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
                         {!! Form::close() !!}
