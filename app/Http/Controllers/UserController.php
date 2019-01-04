@@ -10,6 +10,12 @@ class UserController extends Controller
    public function index()
    {
        $users = User::get();
-       return view('users');
+       return view('users.lista', ['users' => $users]);
    }
+
+    public function novo()
+    {
+        return view('users.formulario');
+    }
+
 }

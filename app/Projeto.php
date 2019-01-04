@@ -13,4 +13,6 @@ class Projeto extends Model
         'descricao',
         'arquivo'
     ];
+
+    protected $table = 'projetos';
 }

@@ -12,30 +12,73 @@
 
                     <div class="panel-body">
 
-                        @if(Session::has('messagem_sucesso'))
                             <div class="alert alert-success">{{Session::get('messagem_sucesso')}}</div>
-                        @endif
+                        <form class="form-horizontal" method="POST" action="{{ route('projetos.salvar') }}">
+                            {{ csrf_field() }}
+                            <input type="hidden" value="{{$userId}}" name="userId">
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label for="name" class="col-md-4 control-label">Nome</label>
 
-                        {!!Form::open(['url'=>'projetos/salvar'])!!}
+                                <div class="col-md-6">
+                                    <input id="name" type="name" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
-                        {!! Form::label ('name','Nome do Projeto')!!}
-                        {!! Form::input('text', 'name', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'Nome do Projeto'])!!}
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
-                        {!! Form::label ('autor','Autor')!!}
-                        {!! Form::input('text', 'autor', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'Autor'])!!}
+                            <div class="form-group{{ $errors->has('autor') ? ' has-error' : '' }}">
+                                <label for="name" class="col-md-4 control-label">Autor</label>
 
-                        {!! Form::label ('descricao','Descricao')!!}
-                        {!! Form::input('text', 'descricao', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'Descrição'])!!}
+                                <div class="col-md-6">
+                                    <input id="name" type="autor" class="form-control" name="autor" value="{{ old('autor') }}" required autofocus>
 
-                        {!! Form::label ('arquivo','Arquivo')!!}
-                        {!! Form::input('text', 'arquivo', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'Arquivo'])!!}
+                                    @if ($errors->has('autor'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('autor') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
-                        {!! Form::label ('userId','userId')!!}
-                        {!! Form::input('number', 'userId', '', ['class' => 'form-control', 'autofocus', 'placeholder' => 'userId'])!!}
+                            <div class="form-group{{ $errors->has('descricao') ? ' has-error' : '' }}">
+                                <label for="descricao" class="col-md-4 control-label">Descrição</label>
 
-                        {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
-                        {!! Form::close() !!}
+                                <div class="col-md-6">
+                                    <input id="descricao" type="descricao" class="form-control" name="descricao" value="{{ old('descricao') }}" required autofocus>
 
+                                    @if ($errors->has('descricao'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('descricao') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('arquivo') ? ' has-error' : '' }}">
+                                <label for="arquivo" class="col-md-4 control-label">Arquivo</label>
+
+                                <div class="col-md-6">
+                                    <input id="arquivo" type="arquivo" class="form-control" name="arquivo" value="{{ old('arquivo') }}" required autofocus>
+
+                                    @if ($errors->has('arquivo'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('arquivo') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Enviar
+                                    </button>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

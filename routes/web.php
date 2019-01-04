@@ -15,16 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('projetos', 'ProjetoController@index');
-Route::get('users', 'UserController@index');
+Route::get('teste', function () {
+    return view('welcome');
+})->name('teste');
 
-Route::group(['middeware' => 'web'], function (){
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
-    Auth::routes();
-    Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth', 'checkAdmin'])->group(function (){
+    Route::get('projetos', 'ProjetoController@index')->name('projetos');
     Route::get('projetos/novo', 'ProjetoController@novo');
-    Route::post('projetos/salvar', 'ProjetoController@salvar');
+    Route::get('projetos/formDpt/{id?}', 'ProjetoController@novoForm');
+    Route::post('projetos/salvar', 'ProjetoController@salvar')->name('projetos.salvar');
 
 });
 
-
+Route::middleware(['auth', 'checkUser'])->group(function (){
+    Route::get('users', 'UserController@index');
+});
