@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\DB;
 
-class checkUser
+class checkProjeto
 {
     /**
      * Handle an incoming request.
@@ -25,11 +26,10 @@ class checkUser
             $dadosUsuario = DB::table('users')
                 ->select('users.*')
                 ->where('users.id', '=', $idUser)
-                ->where('users.status_admin', '=', false)
                 ->get();
 
             if ($dadosUsuario == '[]'){
-                return redirect(route('projetos'));
+                return redirect(route('Home'));
             }elseif ($dadosUsuario != '[]'){
                 return $next($request);
             }

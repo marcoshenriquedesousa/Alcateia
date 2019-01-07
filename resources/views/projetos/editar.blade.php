@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+                <form class="panel panel-default">
                     <div class="panel-heading">
                         Dados do projeto
                         <a class="pull-right" href="{{url('projetos')}}">listagem de projetos</a>
@@ -12,17 +12,17 @@
 
                     <div class="panel-body">
 
-                            <div class="alert alert-success">{{Session::get('messagem_sucesso')}}</div>
-                        <form class="form-horizontal" method="POST" action="{{ route('projetos.salvar') }}">
+                        <div class="alert alert-success">{{Session::get('messagem_sucesso')}}</div>
+
+                        <form class="form-horizontal" method="PUTH" action="{{ route('projetos.atualizar')}}">
                             {{ csrf_field() }}
-
-                            <input type="hidden" value="{{$userId}}" name="userId">
-
+                            <input type="hidden" value="{{$id}}" name="projetoId">
+                            @foreach($dados as $dado)
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-4 control-label">Nome</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="name" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                    <input id="name" type="name" class="form-control" name="name" value="{{ $dado->name}}" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -36,7 +36,7 @@
                                 <label for="name" class="col-md-4 control-label">Autor</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="autor" class="form-control" name="autor" value="{{ old('autor') }}" required autofocus>
+                                    <input id="name" type="autor" class="form-control" name="autor" value="{{ $dado->autor }}" required autofocus>
 
                                     @if ($errors->has('autor'))
                                         <span class="help-block">
@@ -50,7 +50,7 @@
                                 <label for="descricao" class="col-md-4 control-label">Descrição</label>
 
                                 <div class="col-md-6">
-                                    <input id="descricao" type="descricao" class="form-control" name="descricao" value="{{ old('descricao') }}" required autofocus>
+                                    <input id="descricao" type="descricao" class="form-control" name="descricao" value="{{$dado->descricao}}" required autofocus>
 
                                     @if ($errors->has('descricao'))
                                         <span class="help-block">
@@ -64,7 +64,7 @@
                                 <label for="arquivo" class="col-md-4 control-label">Arquivo</label>
 
                                 <div class="col-md-6">
-                                    <input id="arquivo" type="arquivo" class="form-control" name="arquivo" value="{{ old('arquivo') }}" required autofocus>
+                                    <input id="arquivo" type="arquivo" class="form-control" name="arquivo" value="{{$dado->arquivo}}" required autofocus>
 
                                     @if ($errors->has('arquivo'))
                                         <span class="help-block">
@@ -81,6 +81,8 @@
                                     </button>
                                 </div>
                             </div>
+                                @endforeach
+                        </form>
                     </div>
                 </div>
             </div>
